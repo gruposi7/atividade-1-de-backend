@@ -1,0 +1,143 @@
+{
+  "info": {
+    "name": "DevShowcase API",
+    "description": "Colecao para testar os endpoints da DevShowcase API.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "profileId",
+      "value": "1"
+    },
+    {
+      "key": "technologyId",
+      "value": "1"
+    }
+  ],
+  "item": [
+    {
+      "name": "Profiles",
+      "item": [
+        {
+          "name": "Criar profile",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ana Silva\",\n  \"email\": \"ana{{$timestamp}}@example.com\",\n  \"bio\": \"Desenvolvedora backend\",\n  \"github\": \"https://github.com/ana\"\n}"
+            },
+            "url": "{{baseUrl}}/api/profiles"
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 201', function () { pm.response.to.have.status(201); });",
+                "pm.collectionVariables.set('profileId', pm.response.json().id);"
+              ],
+              "type": "text/javascript"
+            }
+          }]
+        },
+        {
+          "name": "Buscar profile por id",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/profiles/{{profileId}}"
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"],
+              "type": "text/javascript"
+            }
+          }]
+        }
+      ]
+    },
+    {
+      "name": "Technologies",
+      "item": [
+        {
+          "name": "Criar technology",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Node.js {{$timestamp}}\"\n}"
+            },
+            "url": "{{baseUrl}}/api/technologies"
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": [
+                "pm.test('Status 201', function () { pm.response.to.have.status(201); });",
+                "pm.collectionVariables.set('technologyId', pm.response.json().id);"
+              ],
+              "type": "text/javascript"
+            }
+          }]
+        },
+        {
+          "name": "Listar technologies",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/technologies"
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"],
+              "type": "text/javascript"
+            }
+          }]
+        }
+      ]
+    },
+    {
+      "name": "Projects",
+      "item": [
+        {
+          "name": "Criar project",
+          "request": {
+            "method": "POST",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"DevShowcase\",\n  \"description\": \"API para projetos\",\n  \"url\": \"https://github.com/exemplo/devshowcase\",\n  \"profileId\": {{profileId}},\n  \"technologyIds\": [{{technologyId}}]\n}"
+            },
+            "url": "{{baseUrl}}/api/projects"
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": ["pm.test('Status 201', function () { pm.response.to.have.status(201); });"],
+              "type": "text/javascript"
+            }
+          }]
+        },
+        {
+          "name": "Listar projects",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/projects"
+          },
+          "event": [{
+            "listen": "test",
+            "script": {
+              "exec": ["pm.test('Status 200', function () { pm.response.to.have.status(200); });"],
+              "type": "text/javascript"
+            }
+          }]
+        }
+      ]
+    }
+  ]
+}
