@@ -4,6 +4,7 @@ const assert = require("node:assert/strict");
 const { toProfileInput } = require("../src/dtos/profile");
 const { toTechnologyInput } = require("../src/dtos/technology");
 const { toProjectInput } = require("../src/dtos/project");
+const { toFeedbackInput } = require("../src/dtos/feedback");
 
 test("Profile DTO aceita dados válidos", () => {
   assert.deepEqual(toProfileInput({ name: "Ana", email: "ana@example.com" }), {
@@ -39,3 +40,16 @@ test("Project DTO rejeita URL inválida", () => {
     profileId: 1
   }), /Dados inválidos/);
 });
+
+  test("Feedback DTO aceita comentário e nota entre 1 e 5", () => {
+    assert.deepEqual(toFeedbackInput({ authorName: "Ana", rating: 5, comment: "Ótimo" }, "2"), {
+      authorName: "Ana",
+      content: "Ótimo",
+      rating: 5,
+      projectId: 2
+    });
+  });
+
+  test("Feedback DTO rejeita nota fora do intervalo", () => {
+    assert.throws(() => toFeedbackInput({ authorName: "Ana", rating: 6, comment: "Ruim" }, 2), /Dados inválidos/);
+  });

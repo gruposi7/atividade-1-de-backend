@@ -28,6 +28,17 @@ A API fica disponível em `http://localhost:3000`.
 - `GET /api/technologies`
 - `POST /api/projects` - `{ "title": "Projeto", "description": "...", "url": "https://...", "profileId": 1, "technologyIds": [1] }`
 - `GET /api/projects`
+- `GET /api/projects?technology=Node&page=1&limit=10` - filtro por tecnologia e paginação
+- `POST /api/projects/:id/feedbacks` - `{ "authorName": "Ana", "rating": 5, "comment": "Excelente!" }`
+- `PUT /api/projects/:id/upvote` - incrementa as curtidas do projeto
+
+## Documentação
+
+Swagger UI: `http://localhost:3000/api-docs`
+
+## Produção
+
+Configure `DATABASE_URL` com a URL do PostgreSQL do Supabase e `PORT` (fornecida automaticamente pelo Render). O arquivo `render.yaml` define o serviço web gratuito, o build com `npm ci`, o health check e o comando `node src/app.js`. No Render, conecte o repositório GitHub e informe o valor secreto de `DATABASE_URL` quando o Blueprint solicitar.
 
 ## Modelo relacional
 

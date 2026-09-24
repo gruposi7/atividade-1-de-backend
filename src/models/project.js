@@ -31,6 +31,23 @@ const Project = sequelize.define("Project", {
   profileId: {
     type: DataTypes.INTEGER,
     allowNull: false
+  },
+  upvotes: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    defaultValue: 0,
+    validate: {
+      min: { args: [0], msg: "Curtidas não podem ser negativas" }
+    }
+  },
+  averageRating: {
+    type: DataTypes.DECIMAL(3, 2),
+    allowNull: false,
+    defaultValue: 0,
+    validate: {
+      min: { args: [0], msg: "Média mínima é 0" },
+      max: { args: [5], msg: "Média máxima é 5" }
+    }
   }
 }, {
   tableName: "projects",
