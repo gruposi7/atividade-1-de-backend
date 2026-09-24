@@ -1,6 +1,6 @@
 # DevShowcase API
 
-Backend REST em Node.js, Express, Sequelize e PostgreSQL/Supabase.
+Backend REST em Node.js, Express, Sequelize e PostgreSQL.
 
 ## Configuração
 
