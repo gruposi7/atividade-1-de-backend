@@ -38,7 +38,6 @@ Swagger UI: `http://localhost:3000/api-docs`
 
 ## Produção
 
-Configure `DATABASE_URL` com a URL do PostgreSQL do Supabase e `PORT` (fornecida automaticamente pelo Render). O arquivo `render.yaml` define o serviço web gratuito, o build com `npm ci`, o health check e o comando `node src/app.js`. No Render, conecte o repositório GitHub e informe o valor secreto de `DATABASE_URL` quando o Blueprint solicitar.
 
 ## Modelo relacional
 
