@@ -10,9 +10,7 @@ Backend REST em Node.js, Express, Sequelize e PostgreSQL/Supabase.
 npm install
 ```
 
-2. Crie `.env` a partir de `.env.example` e informe a URL do Transaction Pooler do Supabase em `DATABASE_URL`.
-
-3. Inicie a API:
+2. Inicie a API:
 
 ```bash
 node src/app.js
@@ -35,8 +33,6 @@ A API fica disponível em `http://localhost:3000`.
 ## Documentação
 
 Swagger UI: `http://localhost:3000/api-docs`
-
-## Produção
 
 
 ## Modelo relacional
